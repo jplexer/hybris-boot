@@ -350,7 +350,7 @@ ifeq ($(shell test $(ANDROID_VERSION_MAJOR) -ge 10 && echo true),true)
 # init is split of into early and second stage init starting with android 10
 HYBRIS_INIT_TARGETS := init_second_stage init.rc
 # Devices without gralloc hardware module need libui_compat_layer
-HYBRIS_INIT_TARGETS += libui_compat_layer
+#HYBRIS_INIT_TARGETS += libui_compat_layer
 ifeq ($(shell test $(ANDROID_VERSION_MAJOR) -eq 10 && echo true),true)
 HYBRIS_INIT_TARGETS += com.android.runtime.release
 else
