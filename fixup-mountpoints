@@ -1669,7 +1669,7 @@ case "$DEVICE" in
             -e 's block/platform/omap/omap_hsmmc.0/by-name/efs mmcblk0p3 ' \
             "$@"
         ;;
-  
+
     "cheeseburger"|"dumpling")
         sed -i \
             -e 's block/bootdevice/by-name/LOGO sde18 ' \
@@ -1746,7 +1746,7 @@ case "$DEVICE" in
             -e 's block/bootdevice/by-name/xblbak sdc1 ' \
             "$@"
         ;;
-        
+
         "enchilada" | "fajita")
         sed -i \
             -e 's block/bootdevice/by-name/bluetooth sde5 ' \
@@ -2495,6 +2495,94 @@ case "$DEVICE" in
             -e 's block/bootdevice/by-name/xblbak sdc2 ' \
             "$@"
         ;;
+        "erhai")
+            sed -i \
+                -e 's block/by-name/vbmeta_system_a sda6 ' \
+                -e 's block/bootdevice/by-name/vbmeta_system_a sda6 ' \
+                -e 's block/by-name/vbmeta_system_b sda7 ' \
+                -e 's block/bootdevice/by-name/vbmeta_system_b sda7 ' \
+                -e 's block/by-name/vbmeta_vendor_a sda8 ' \
+                -e 's block/bootdevice/by-name/vbmeta_vendor_a sda8 ' \
+                -e 's block/by-name/vbmeta_vendor_b sda9 ' \
+                -e 's block/bootdevice/by-name/vbmeta_vendor_b sda9 ' \
+                -e 's block/by-name/oplusreserve2 sdf3 ' \
+                -e 's block/bootdevice/by-name/oplusreserve2 sdf3 ' \
+                -e 's block/by-name/vbmeta_system sda7 ' \
+                -e 's block/bootdevice/by-name/vbmeta_system sda7 ' \
+                -e 's block/by-name/vbmeta_vendor sda9 ' \
+                -e 's block/bootdevice/by-name/vbmeta_vendor sda9 ' \
+                -e 's block/by-name/vendor_boot_a sde23 ' \
+                -e 's block/bootdevice/by-name/vendor_boot_a sde23 ' \
+                -e 's block/by-name/vendor_boot_b sde59 ' \
+                -e 's block/bootdevice/by-name/vendor_boot_b sde59 ' \
+                -e 's block/by-name/bluetooth_a sde7 ' \
+                -e 's block/bootdevice/by-name/bluetooth_a sde7 ' \
+                -e 's block/by-name/bluetooth_b sde43 ' \
+                -e 's block/bootdevice/by-name/bluetooth_b sde43 ' \
+                -e 's block/by-name/init_boot_a sde30 ' \
+                -e 's block/bootdevice/by-name/init_boot_a sde30 ' \
+                -e 's block/by-name/init_boot_b sde65 ' \
+                -e 's block/bootdevice/by-name/init_boot_b sde65 ' \
+                -e 's block/by-name/vendor_boot sde59 ' \
+                -e 's block/bootdevice/by-name/vendor_boot sde59 ' \
+                -e 's block/by-name/recovery_a sde27 ' \
+                -e 's block/bootdevice/by-name/recovery_a sde27 ' \
+                -e 's block/by-name/recovery_b sde62 ' \
+                -e 's block/bootdevice/by-name/recovery_b sde62 ' \
+                -e 's block/by-name/vm-persist sde78 ' \
+                -e 's block/bootdevice/by-name/vm-persist sde78 ' \
+                -e 's block/by-name/bluetooth sde43 ' \
+                -e 's block/bootdevice/by-name/bluetooth sde43 ' \
+                -e 's block/by-name/init_boot sde65 ' \
+                -e 's block/bootdevice/by-name/init_boot sde65 ' \
+                -e 's block/by-name/metadata sda10 ' \
+                -e 's block/bootdevice/by-name/metadata sda10 ' \
+                -e 's block/by-name/recovery sde62 ' \
+                -e 's block/bootdevice/by-name/recovery sde62 ' \
+                -e 's block/by-name/userdata sda15 ' \
+                -e 's block/bootdevice/by-name/userdata sda15 ' \
+                -e 's block/by-name/vbmeta_a sde15 ' \
+                -e 's block/bootdevice/by-name/vbmeta_a sde15 ' \
+                -e 's block/by-name/vbmeta_b sde51 ' \
+                -e 's block/bootdevice/by-name/vbmeta_b sde51 ' \
+                -e 's block/by-name/modem_a sde6 ' \
+                -e 's block/bootdevice/by-name/modem_a sde6 ' \
+                -e 's block/by-name/modem_b sde42 ' \
+                -e 's block/bootdevice/by-name/modem_b sde42 ' \
+                -e 's block/by-name/persist sda2 ' \
+                -e 's block/bootdevice/by-name/persist sda2 ' \
+                -e 's block/by-name/boot_a sde12 ' \
+                -e 's block/bootdevice/by-name/boot_a sde12 ' \
+                -e 's block/by-name/boot_b sde48 ' \
+                -e 's block/bootdevice/by-name/boot_b sde48 ' \
+                -e 's block/by-name/dtbo_a sde16 ' \
+                -e 's block/bootdevice/by-name/dtbo_a sde16 ' \
+                -e 's block/by-name/dtbo_b sde52 ' \
+                -e 's block/bootdevice/by-name/dtbo_b sde52 ' \
+                -e 's block/by-name/spunvm sde82 ' \
+                -e 's block/bootdevice/by-name/spunvm sde82 ' \
+                -e 's block/by-name/vbmeta sde51 ' \
+                -e 's block/bootdevice/by-name/vbmeta sde51 ' \
+                -e 's block/by-name/dsp_a sde9 ' \
+                -e 's block/bootdevice/by-name/dsp_a sde9 ' \
+                -e 's block/by-name/dsp_b sde45 ' \
+                -e 's block/bootdevice/by-name/dsp_b sde45 ' \
+                -e 's block/by-name/modem sde42 ' \
+                -e 's block/bootdevice/by-name/modem sde42 ' \
+                -e 's block/by-name/super sda14 ' \
+                -e 's block/bootdevice/by-name/super sda14 ' \
+                -e 's block/by-name/boot sde48 ' \
+                -e 's block/bootdevice/by-name/boot sde48 ' \
+                -e 's block/by-name/dtbo sde52 ' \
+                -e 's block/bootdevice/by-name/dtbo sde52 ' \
+                -e 's block/by-name/misc sda3 ' \
+                -e 's block/bootdevice/by-name/misc sda3 ' \
+                -e 's block/by-name/qmcs sde24 ' \
+                -e 's block/bootdevice/by-name/qmcs sde24 ' \
+                -e 's block/by-name/dsp sde45 ' \
+                -e 's block/bootdevice/by-name/dsp sde45 ' \
+                "$@"
+            ;;
     *)
         cat <<EOF
 
@@ -2509,4 +2597,3 @@ EOF
         exit 1
         ;;
 esac
-
