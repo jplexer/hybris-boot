@@ -1,0 +1,25 @@
+#!/bin/busybox sh
+# Called by the kernel for early pKVM modules (kvm-arm.protected_modules):
+#   /system/bin/modprobe -q [-d DIR] -- NAME
+# busybox modprobe finds modules in /lib/modules/$(uname -r) (GKI vendor_kernel_boot layout).
+while [ $# -gt 0 ]; do
+    case "$1" in
+        -q) shift ;;
+        -d) shift 2 ;;
+        --) shift; break ;;
+        *)  break ;;
+    esac
+done
+
+# This runs before init, so /proc may not be mounted yet
+MOUNTED_PROC=
+if [ ! -e /proc/modules ]; then
+    /bin/busybox mkdir -p /proc
+    /bin/busybox mount -t proc proc /proc && MOUNTED_PROC=1
+fi
+
+/bin/busybox modprobe "$@"
+RET=$?
+
+[ -n "$MOUNTED_PROC" ] && /bin/busybox umount /proc
+exit $RET
