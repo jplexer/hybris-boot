@@ -1669,7 +1669,7 @@ case "$DEVICE" in
             -e 's block/platform/omap/omap_hsmmc.0/by-name/efs mmcblk0p3 ' \
             "$@"
         ;;
-  
+
     "cheeseburger"|"dumpling")
         sed -i \
             -e 's block/bootdevice/by-name/LOGO sde18 ' \
@@ -1746,7 +1746,7 @@ case "$DEVICE" in
             -e 's block/bootdevice/by-name/xblbak sdc1 ' \
             "$@"
         ;;
-        
+
         "enchilada" | "fajita")
         sed -i \
             -e 's block/bootdevice/by-name/bluetooth sde5 ' \
@@ -2495,6 +2495,196 @@ case "$DEVICE" in
             -e 's block/bootdevice/by-name/xblbak sdc2 ' \
             "$@"
         ;;
+    "comet")
+        sed -i \
+            -e 's block/platform/13200000.ufs/by-name/vendor_kernel_boot_b sda26 ' \
+            -e 's block/bootdevice/by-name/vendor_kernel_boot_b sda26 ' \
+            -e 's block/by-name/vendor_kernel_boot_b sda26 ' \
+            -e 's block/platform/13200000.ufs/by-name/vendor_kernel_boot_a sda16 ' \
+            -e 's block/bootdevice/by-name/vendor_kernel_boot_a sda16 ' \
+            -e 's block/by-name/vendor_kernel_boot_a sda16 ' \
+            -e 's block/platform/13200000.ufs/by-name/vbmeta_vendor_b sda30 ' \
+            -e 's block/bootdevice/by-name/vbmeta_vendor_b sda30 ' \
+            -e 's block/by-name/vbmeta_vendor_b sda30 ' \
+            -e 's block/platform/13200000.ufs/by-name/vbmeta_vendor_a sda20 ' \
+            -e 's block/bootdevice/by-name/vbmeta_vendor_a sda20 ' \
+            -e 's block/by-name/vbmeta_vendor_a sda20 ' \
+            -e 's block/platform/13200000.ufs/by-name/vbmeta_system_b sda29 ' \
+            -e 's block/bootdevice/by-name/vbmeta_system_b sda29 ' \
+            -e 's block/by-name/vbmeta_system_b sda29 ' \
+            -e 's block/platform/13200000.ufs/by-name/vbmeta_system_a sda19 ' \
+            -e 's block/bootdevice/by-name/vbmeta_system_a sda19 ' \
+            -e 's block/by-name/vbmeta_system_a sda19 ' \
+            -e 's block/platform/13200000.ufs/by-name/trusty_userdata sda9 ' \
+            -e 's block/bootdevice/by-name/trusty_userdata sda9 ' \
+            -e 's block/by-name/trusty_userdata sda9 ' \
+            -e 's block/platform/13200000.ufs/by-name/trusty_persist sda8 ' \
+            -e 's block/bootdevice/by-name/trusty_persist sda8 ' \
+            -e 's block/by-name/trusty_persist sda8 ' \
+            -e 's block/platform/13200000.ufs/by-name/modem_userdata sda7 ' \
+            -e 's block/bootdevice/by-name/modem_userdata sda7 ' \
+            -e 's block/by-name/modem_userdata sda7 ' \
+            -e 's block/platform/13200000.ufs/by-name/vendor_boot_b sda25 ' \
+            -e 's block/bootdevice/by-name/vendor_boot_b sda25 ' \
+            -e 's block/by-name/vendor_boot_b sda25 ' \
+            -e 's block/platform/13200000.ufs/by-name/vendor_boot_a sda15 ' \
+            -e 's block/bootdevice/by-name/vendor_boot_a sda15 ' \
+            -e 's block/by-name/vendor_boot_a sda15 ' \
+            -e 's block/platform/13200000.ufs/by-name/ufs_internal sda12 ' \
+            -e 's block/bootdevice/by-name/ufs_internal sda12 ' \
+            -e 's block/by-name/ufs_internal sda12 ' \
+            -e 's block/platform/13200000.ufs/by-name/dram_train_b sdc4 ' \
+            -e 's block/bootdevice/by-name/dram_train_b sdc4 ' \
+            -e 's block/by-name/dram_train_b sdc4 ' \
+            -e 's block/platform/13200000.ufs/by-name/dram_train_a sdb4 ' \
+            -e 's block/bootdevice/by-name/dram_train_a sdb4 ' \
+            -e 's block/by-name/dram_train_a sdb4 ' \
+            -e 's block/platform/13200000.ufs/by-name/init_boot_b sda24 ' \
+            -e 's block/bootdevice/by-name/init_boot_b sda24 ' \
+            -e 's block/by-name/init_boot_b sda24 ' \
+            -e 's block/platform/13200000.ufs/by-name/init_boot_a sda14 ' \
+            -e 's block/bootdevice/by-name/init_boot_a sda14 ' \
+            -e 's block/by-name/init_boot_a sda14 ' \
+            -e 's block/platform/13200000.ufs/by-name/efs_backup sda6 ' \
+            -e 's block/bootdevice/by-name/efs_backup sda6 ' \
+            -e 's block/by-name/efs_backup sda6 ' \
+            -e 's block/platform/13200000.ufs/by-name/gsa_bl1_b sdc9 ' \
+            -e 's block/bootdevice/by-name/gsa_bl1_b sdc9 ' \
+            -e 's block/by-name/gsa_bl1_b sdc9 ' \
+            -e 's block/platform/13200000.ufs/by-name/gsa_bl1_a sdb9 ' \
+            -e 's block/bootdevice/by-name/gsa_bl1_a sdb9 ' \
+            -e 's block/by-name/gsa_bl1_a sdb9 ' \
+            -e 's block/platform/13200000.ufs/by-name/vbmeta_b sda28 ' \
+            -e 's block/bootdevice/by-name/vbmeta_b sda28 ' \
+            -e 's block/by-name/vbmeta_b sda28 ' \
+            -e 's block/platform/13200000.ufs/by-name/vbmeta_a sda18 ' \
+            -e 's block/bootdevice/by-name/vbmeta_a sda18 ' \
+            -e 's block/by-name/vbmeta_a sda18 ' \
+            -e 's block/platform/13200000.ufs/by-name/userdata sda34 ' \
+            -e 's block/bootdevice/by-name/userdata sda34 ' \
+            -e 's block/by-name/userdata sda34 ' \
+            -e 's block/platform/13200000.ufs/by-name/mfg_data sdd4 ' \
+            -e 's block/bootdevice/by-name/mfg_data sdd4 ' \
+            -e 's block/by-name/mfg_data sdd4 ' \
+            -e 's block/platform/13200000.ufs/by-name/metadata sda10 ' \
+            -e 's block/bootdevice/by-name/metadata sda10 ' \
+            -e 's block/by-name/metadata sda10 ' \
+            -e 's block/platform/13200000.ufs/by-name/pvmfw_b sda31 ' \
+            -e 's block/bootdevice/by-name/pvmfw_b sda31 ' \
+            -e 's block/by-name/pvmfw_b sda31 ' \
+            -e 's block/platform/13200000.ufs/by-name/pvmfw_a sda21 ' \
+            -e 's block/bootdevice/by-name/pvmfw_a sda21 ' \
+            -e 's block/by-name/pvmfw_a sda21 ' \
+            -e 's block/platform/13200000.ufs/by-name/persist sda1 ' \
+            -e 's block/bootdevice/by-name/persist sda1 ' \
+            -e 's block/by-name/persist sda1 ' \
+            -e 's block/platform/13200000.ufs/by-name/modem_b sda32 ' \
+            -e 's block/bootdevice/by-name/modem_b sda32 ' \
+            -e 's block/by-name/modem_b sda32 ' \
+            -e 's block/platform/13200000.ufs/by-name/modem_a sda22 ' \
+            -e 's block/bootdevice/by-name/modem_a sda22 ' \
+            -e 's block/by-name/modem_a sda22 ' \
+            -e 's block/platform/13200000.ufs/by-name/devinfo sdd1 ' \
+            -e 's block/bootdevice/by-name/devinfo sdd1 ' \
+            -e 's block/by-name/devinfo sdd1 ' \
+            -e 's block/platform/13200000.ufs/by-name/tzsw_b sdc7 ' \
+            -e 's block/bootdevice/by-name/tzsw_b sdc7 ' \
+            -e 's block/by-name/tzsw_b sdc7 ' \
+            -e 's block/platform/13200000.ufs/by-name/tzsw_a sdb7 ' \
+            -e 's block/bootdevice/by-name/tzsw_a sdb7 ' \
+            -e 's block/by-name/tzsw_a sdb7 ' \
+            -e 's block/platform/13200000.ufs/by-name/ldfw_b sdc10 ' \
+            -e 's block/bootdevice/by-name/ldfw_b sdc10 ' \
+            -e 's block/by-name/ldfw_b sdc10 ' \
+            -e 's block/platform/13200000.ufs/by-name/ldfw_a sdb10 ' \
+            -e 's block/bootdevice/by-name/ldfw_a sdb10 ' \
+            -e 's block/by-name/ldfw_a sdb10 ' \
+            -e 's block/platform/13200000.ufs/by-name/dtbo_b sda27 ' \
+            -e 's block/bootdevice/by-name/dtbo_b sda27 ' \
+            -e 's block/by-name/dtbo_b sda27 ' \
+            -e 's block/platform/13200000.ufs/by-name/dtbo_a sda17 ' \
+            -e 's block/bootdevice/by-name/dtbo_a sda17 ' \
+            -e 's block/by-name/dtbo_a sda17 ' \
+            -e 's block/platform/13200000.ufs/by-name/boot_b sda23 ' \
+            -e 's block/bootdevice/by-name/boot_b sda23 ' \
+            -e 's block/by-name/boot_b sda23 ' \
+            -e 's block/platform/13200000.ufs/by-name/boot_a sda13 ' \
+            -e 's block/bootdevice/by-name/boot_a sda13 ' \
+            -e 's block/by-name/boot_a sda13 ' \
+            -e 's block/platform/13200000.ufs/by-name/bl31_b sdc6 ' \
+            -e 's block/bootdevice/by-name/bl31_b sdc6 ' \
+            -e 's block/by-name/bl31_b sdc6 ' \
+            -e 's block/platform/13200000.ufs/by-name/bl31_a sdb6 ' \
+            -e 's block/bootdevice/by-name/bl31_a sdb6 ' \
+            -e 's block/by-name/bl31_a sdb6 ' \
+            -e 's block/platform/13200000.ufs/by-name/super sda33 ' \
+            -e 's block/bootdevice/by-name/super sda33 ' \
+            -e 's block/by-name/super sda33 ' \
+            -e 's block/platform/13200000.ufs/by-name/pinfo sdd2 ' \
+            -e 's block/bootdevice/by-name/pinfo sdd2 ' \
+            -e 's block/by-name/pinfo sdd2 ' \
+            -e 's block/platform/13200000.ufs/by-name/pbl_b sdc2 ' \
+            -e 's block/bootdevice/by-name/pbl_b sdc2 ' \
+            -e 's block/by-name/pbl_b sdc2 ' \
+            -e 's block/platform/13200000.ufs/by-name/pbl_a sdb2 ' \
+            -e 's block/bootdevice/by-name/pbl_a sdb2 ' \
+            -e 's block/by-name/pbl_a sdb2 ' \
+            -e 's block/platform/13200000.ufs/by-name/gsa_b sdc8 ' \
+            -e 's block/bootdevice/by-name/gsa_b sdc8 ' \
+            -e 's block/by-name/gsa_b sdc8 ' \
+            -e 's block/platform/13200000.ufs/by-name/gsa_a sdb8 ' \
+            -e 's block/bootdevice/by-name/gsa_a sdb8 ' \
+            -e 's block/by-name/gsa_a sdb8 ' \
+            -e 's block/platform/13200000.ufs/by-name/gcf_b sdc12 ' \
+            -e 's block/bootdevice/by-name/gcf_b sdc12 ' \
+            -e 's block/by-name/gcf_b sdc12 ' \
+            -e 's block/platform/13200000.ufs/by-name/gcf_a sdb12 ' \
+            -e 's block/bootdevice/by-name/gcf_a sdb12 ' \
+            -e 's block/by-name/gcf_a sdb12 ' \
+            -e 's block/platform/13200000.ufs/by-name/dpm_b sdc11 ' \
+            -e 's block/bootdevice/by-name/dpm_b sdc11 ' \
+            -e 's block/by-name/dpm_b sdc11 ' \
+            -e 's block/platform/13200000.ufs/by-name/dpm_a sdb11 ' \
+            -e 's block/bootdevice/by-name/dpm_a sdb11 ' \
+            -e 's block/by-name/dpm_a sdb11 ' \
+            -e 's block/platform/13200000.ufs/by-name/blenv sdd3 ' \
+            -e 's block/bootdevice/by-name/blenv sdd3 ' \
+            -e 's block/by-name/blenv sdd3 ' \
+            -e 's block/platform/13200000.ufs/by-name/bl2_b sdc3 ' \
+            -e 's block/bootdevice/by-name/bl2_b sdc3 ' \
+            -e 's block/by-name/bl2_b sdc3 ' \
+            -e 's block/platform/13200000.ufs/by-name/bl2_a sdb3 ' \
+            -e 's block/bootdevice/by-name/bl2_a sdb3 ' \
+            -e 's block/by-name/bl2_a sdb3 ' \
+            -e 's block/platform/13200000.ufs/by-name/bl1_b sdc1 ' \
+            -e 's block/bootdevice/by-name/bl1_b sdc1 ' \
+            -e 's block/by-name/bl1_b sdc1 ' \
+            -e 's block/platform/13200000.ufs/by-name/bl1_a sdb1 ' \
+            -e 's block/bootdevice/by-name/bl1_a sdb1 ' \
+            -e 's block/by-name/bl1_a sdb1 ' \
+            -e 's block/platform/13200000.ufs/by-name/abl_b sdc5 ' \
+            -e 's block/bootdevice/by-name/abl_b sdc5 ' \
+            -e 's block/by-name/abl_b sdc5 ' \
+            -e 's block/platform/13200000.ufs/by-name/abl_a sdb5 ' \
+            -e 's block/bootdevice/by-name/abl_a sdb5 ' \
+            -e 's block/by-name/abl_a sdb5 ' \
+            -e 's block/platform/13200000.ufs/by-name/misc sda3 ' \
+            -e 's block/bootdevice/by-name/misc sda3 ' \
+            -e 's block/by-name/misc sda3 ' \
+            -e 's block/platform/13200000.ufs/by-name/klog sda2 ' \
+            -e 's block/bootdevice/by-name/klog sda2 ' \
+            -e 's block/by-name/klog sda2 ' \
+            -e 's block/platform/13200000.ufs/by-name/fips sda11 ' \
+            -e 's block/bootdevice/by-name/fips sda11 ' \
+            -e 's block/by-name/fips sda11 ' \
+            -e 's block/platform/13200000.ufs/by-name/frp sda4 ' \
+            -e 's block/bootdevice/by-name/frp sda4 ' \
+            -e 's block/by-name/frp sda4 ' \
+            -e 's block/platform/13200000.ufs/by-name/efs sda5 ' \
+            -e 's block/bootdevice/by-name/efs sda5 ' \
+            -e 's block/by-name/efs sda5 ' \
+            "$@"
+        ;;
     *)
         cat <<EOF
 
@@ -2509,4 +2699,3 @@ EOF
         exit 1
         ;;
 esac
-
