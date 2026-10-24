@@ -62,6 +62,9 @@ endif
 ifeq "$(HYBRIS_FSTABS)" ""
 HYBRIS_FSTABS := $(shell find device/*/*/$(TARGET_DEVICE) -name *fstab* | grep -v goldfish)
 endif
+ifeq ($(TARGET_DEVICE),comet)
+HYBRIS_FSTABS := device/google/zumapro/conf/f2fs/fstab.rw.zumapro.f2fs device/google/zumapro/conf/fstab.zumapro.common
+endif
 
 # Get the unique /dev field(s) from the line(s) containing the fs mount point
 # Note the perl one-liner uses double-$ as per Makefile syntax
