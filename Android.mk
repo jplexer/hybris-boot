@@ -46,7 +46,7 @@ HYBRIS_FIXUP_MOUNTS := $(shell ls -1 $(LOCAL_PATH)/../fixup-mountpoints $(LOCAL_
 # but Cyanogenmod seems to use device/*/$(TARGET_DEVICE) in config.mk so we will too.
 HYBRIS_FSTABS := $(shell find device/*/$(TARGET_DEVICE) -name *fstab* | grep -v goldfish)
 # If fstab files were not found from primary device repo then they might be in
-# some other device repo so try to search for them first in device/PRODUCT_MANUFACTURER. 
+# some other device repo so try to search for them first in device/PRODUCT_MANUFACTURER.
 # In many cases PRODUCT_MANUFACTURER is the short vendor name used in folder names.
 ifeq "$(HYBRIS_FSTABS)" ""
 TARGET_VENDOR := "$(shell echo $(PRODUCT_MANUFACTURER) | tr '[:upper:]' '[:lower:]')"
@@ -64,6 +64,7 @@ HYBRIS_FSTABS := $(shell find device/*/*/$(TARGET_DEVICE) -name *fstab* | grep -
 endif
 ifeq ($(TARGET_DEVICE),comet)
 HYBRIS_FSTABS := device/google/zumapro/conf/f2fs/fstab.rw.zumapro.f2fs device/google/zumapro/conf/fstab.zumapro.common
+HYBRIS_PREBUILT_KERNEL := device/google/comet-kernels/6.1/Image.lz4
 endif
 
 # Get the unique /dev field(s) from the line(s) containing the fs mount point
@@ -83,7 +84,7 @@ BB_STATIC := $(PRODUCT_OUT)/utilities/busybox
 ifneq ($(strip $(TARGET_NO_KERNEL)),true)
   INSTALLED_KERNEL_TARGET := $(PRODUCT_OUT)/kernel
 else
-  INSTALLED_KERNEL_TARGET :=
+  INSTALLED_KERNEL_TARGET := $(HYBRIS_PREBUILT_KERNEL)
 endif
 
 HYBRIS_BOOTIMAGE_ARGS := \
