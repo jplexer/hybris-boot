@@ -145,13 +145,18 @@ bootsplash() {
 }
 
 load_kernel_modules() {
-    CFG_FILE=/lib/modules/modules.load.recovery
+    KVER="$(uname -r)"
 
-    if [ ! -f $CFG_FILE ]; then
+    if [ -f /lib/modules/modules.load.recovery ]; then
+        # Legacy layout: flat /lib/modules
+        CFG_FILE=/lib/modules/modules.load.recovery
+        [ -e "/lib/modules/$KVER" ] || ln -s /lib/modules "/lib/modules/$KVER"
+    elif [ -f "/lib/modules/$KVER/modules.load" ]; then
+        # GKI layout: vendor_kernel_boot ships versioned dir with modules.load
+        CFG_FILE="/lib/modules/$KVER/modules.load"
+    else
         return
     fi
-
-    ln -s /lib/modules "/lib/modules/$(uname -r)"
 
     cat $CFG_FILE | while read line; do
         set -- $line
