@@ -144,6 +144,21 @@ bootsplash() {
     fi
 }
 
+# DEBUG (comet): mirror init log + dmesg to /data once it is mounted
+(
+    while true; do
+        if /bin/busybox grep -q " /data " /proc/mounts 2>/dev/null; then
+            /bin/busybox mkdir -p /data/hybris-debug
+            /bin/busybox cp /init.log /data/hybris-debug/init.log
+            /bin/busybox dmesg > /data/hybris-debug/dmesg.txt
+            /bin/busybox ls -la /dev/block > /data/hybris-debug/dev-block.txt 2>&1
+            /bin/busybox ls /sys/class/udc > /data/hybris-debug/udc.txt 2>&1
+            /bin/busybox sync
+        fi
+        /bin/busybox sleep 2
+    done
+) &
+
 load_kernel_modules() {
     KVER="$(uname -r)"
 
