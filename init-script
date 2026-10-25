@@ -402,7 +402,7 @@ check_kernel_config() {
 	echo "No /proc/config.gz. Enable CONFIG_IKCONFIG and CONFIG_IKCONFIG_PROC" >> /diagnosis.log
     else
 	# Must be =y
-	for x in CONFIG_CGROUPS CONFIG_AUTOFS4_FS CONFIG_DEVTMPFS_MOUNT CONFIG_DEVTMPFS CONFIG_UNIX CONFIG_INOTIFY_USER CONFIG_SYSVIPC CONFIG_NET CONFIG_PROC_FS CONFIG_SIGNALFD CONFIG_SYSFS CONFIG_TMPFS_POSIX_ACL CONFIG_VT; do
+	for x in CONFIG_CGROUPS CONFIG_DEVTMPFS_MOUNT CONFIG_DEVTMPFS CONFIG_UNIX CONFIG_INOTIFY_USER CONFIG_SYSVIPC CONFIG_NET CONFIG_PROC_FS CONFIG_SIGNALFD CONFIG_SYSFS CONFIG_TMPFS_POSIX_ACL CONFIG_VT; do
 		zcat /proc/config.gz | grep -E "^$x=y\$" || echo "$x=y not found in /proc/config.gz" >> /diagnosis.log
  	done
 	# Must not be =y
@@ -431,11 +431,11 @@ if [ "$DONE_SWITCH" = "no" ]; then
     ln -s /proc/mounts /etc/mtab
 
     check_kernel_config
-    debug_panic "after-check-kernel-config"
 
     bootsplash
 
     mount_stowaways
+    debug_panic "after-mount-stowaways"
 
     # No target debug unless we debug here too (for now)
 
