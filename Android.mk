@@ -22,7 +22,7 @@ HYBRIS_PATH:=$(LOCAL_PATH)
 # image specific kernel COMMANDLINE vars is provided but whether it
 # works or not is down to your bootloader.
 
-HYBRIS_BOOTIMG_COMMANDLINE := kvm-arm.mode=nvhe hung_task_panic=1 hung_task_timeout_secs=30
+HYBRIS_BOOTIMG_COMMANDLINE := kvm-arm.mode=nvhe
 HYBRIS_RECOVERYIMG_COMMANDLINE := bootmode=debug
 HYBRIS_BOOTLOGO :=
 # BOOT
