@@ -248,8 +248,14 @@ usb_setup_configfs() {
     write $GADGET_DIR/g1/strings/0x409/product      "$CUSTOMPRODUCT"
 
     if echo $USB_FUNCTIONS | grep -q "rndis"; then
-        mkdir $GADGET_DIR/g1/functions/rndis.usb0
-        mkdir $GADGET_DIR/g1/functions/rndis_bam.rndis
+        # GKI kernels have no RNDIS anymore; fall back to NCM (shows up as usb0)
+        if mkdir $GADGET_DIR/g1/functions/rndis.usb0 2>/dev/null; then
+            NET_FUNC=rndis.usb0
+            mkdir $GADGET_DIR/g1/functions/rndis_bam.rndis 2>/dev/null
+        else
+            mkdir $GADGET_DIR/g1/functions/ncm.usb0
+            NET_FUNC=ncm.usb0
+        fi
     fi
     echo $USB_FUNCTIONS | grep -q "mass_storage" && mkdir $GADGET_DIR/g1/functions/storage.0
 
@@ -258,8 +264,9 @@ usb_setup_configfs() {
     write $GADGET_DIR/g1/configs/c.1/strings/0x409/configuration "$USB_FUNCTIONS"
 
     if echo $USB_FUNCTIONS | grep -q "rndis"; then
-        ln -s $GADGET_DIR/g1/functions/rndis.usb0 $GADGET_DIR/g1/configs/c.1
-        ln -s $GADGET_DIR/g1/functions/rndis_bam.rndis $GADGET_DIR/g1/configs/c.1
+        ln -s $GADGET_DIR/g1/functions/$NET_FUNC $GADGET_DIR/g1/configs/c.1
+        [ -d $GADGET_DIR/g1/functions/rndis_bam.rndis ] && \
+            ln -s $GADGET_DIR/g1/functions/rndis_bam.rndis $GADGET_DIR/g1/configs/c.1
     fi
     echo $USB_FUNCTIONS | grep -q "mass_storage" && ln -s $GADGET_DIR/g1/functions/storage.0 $GADGET_DIR/g1/configs/c.1
 
