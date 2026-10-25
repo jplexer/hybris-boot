@@ -431,6 +431,7 @@ if [ "$DONE_SWITCH" = "no" ]; then
     ln -s /proc/mounts /etc/mtab
 
     check_kernel_config
+    debug_panic "after-check-kernel-config"
 
     bootsplash
 
