@@ -22,6 +22,30 @@
 # General logging
 set -x
 exec > /init.log 2>&1
+# DEBUG (comet): mirror logs to /data, or dump them into pstore if /data never shows up
+(
+    B=/bin/busybox
+    [ -c /dev/kmsg ] || $B mknod /dev/kmsg c 1 11
+    n=0
+    while true; do
+        if $B grep -q " /data " /proc/mounts 2>/dev/null; then
+            $B mkdir -p /data/hybris-debug
+            $B cp /init.log /data/hybris-debug/init.log
+            $B dmesg > /data/hybris-debug/dmesg.txt
+            $B sync
+        elif [ $n -ge 40 ]; then
+            echo on > /proc/sys/kernel/printk_devkmsg 2>/dev/null
+            echo "HYBRIS-DEBUG: /data not mounted after ${n}s" > /dev/kmsg
+            while read -r l; do echo "HYBRIS-LOG: $l" > /dev/kmsg; done < /init.log
+            $B ps | while read -r l; do echo "HYBRIS-PS: $l" > /dev/kmsg; done
+            $B ls /dev/block 2>&1 | $B tr '\n' ' ' | while read -r l; do echo "HYBRIS-DEV: $l" > /dev/kmsg; done
+            $B sync
+            echo b > /proc/sysrq-trigger
+        fi
+        $B sleep 2
+        n=$((n + 2))
+    done
+) &
 echo "Running Mer Boat Loader"
 
 BOOTLOGO=%BOOTLOGO%
@@ -143,21 +167,6 @@ bootsplash() {
 	zcat /bootsplash.gz > /dev/fb0
     fi
 }
-
-# DEBUG (comet): mirror init log + dmesg to /data once it is mounted
-(
-    while true; do
-        if /bin/busybox grep -q " /data " /proc/mounts 2>/dev/null; then
-            /bin/busybox mkdir -p /data/hybris-debug
-            /bin/busybox cp /init.log /data/hybris-debug/init.log
-            /bin/busybox dmesg > /data/hybris-debug/dmesg.txt
-            /bin/busybox ls -la /dev/block > /data/hybris-debug/dev-block.txt 2>&1
-            /bin/busybox ls /sys/class/udc > /data/hybris-debug/udc.txt 2>&1
-            /bin/busybox sync
-        fi
-        /bin/busybox sleep 2
-    done
-) &
 
 load_kernel_modules() {
     KVER="$(uname -r)"
