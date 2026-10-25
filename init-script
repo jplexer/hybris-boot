@@ -176,8 +176,14 @@ load_kernel_modules() {
         CFG_FILE=/lib/modules/modules.load.recovery
         [ -e "/lib/modules/$KVER" ] || ln -s /lib/modules "/lib/modules/$KVER"
     elif [ -f "/lib/modules/$KVER/modules.load" ]; then
-        # GKI layout: vendor_kernel_boot ships versioned dir with modules.load
-        CFG_FILE="/lib/modules/$KVER/modules.load"
+        # GKI layout: use Android's libmodprobe (honors softdeps, options, blocklist)
+        [ -c /dev/null ] || mknod -m 666 /dev/null c 1 3
+        [ -c /dev/kmsg ] || mknod -m 600 /dev/kmsg c 1 11
+        /system/bin/real/modprobe -b \
+            --all="/lib/modules/$KVER/modules.load" \
+            --dirname="/lib/modules/$KVER" \
+            </dev/null >/dev/kmsg 2>&1
+        return
     else
         return
     fi

@@ -17,13 +17,12 @@
 
 LOCAL_PATH:= $(call my-dir)
 HYBRIS_PATH:=$(LOCAL_PATH)
-HYBRIS_BOOTIMG_COMMANDLINE := androidboot.init_fatal_panic=true hung_task_panic=1 hung_task_timeout_secs=30
 # We use the commandline and kernel configuration varables from
 # build/core/Makefile to be consistent. Support for boot/recovery
 # image specific kernel COMMANDLINE vars is provided but whether it
 # works or not is down to your bootloader.
 
-HYBRIS_BOOTIMG_COMMANDLINE :=
+HYBRIS_BOOTIMG_COMMANDLINE := kvm-arm.mode=nvhe hung_task_panic=1 hung_task_timeout_secs=30
 HYBRIS_RECOVERYIMG_COMMANDLINE := bootmode=debug
 HYBRIS_BOOTLOGO :=
 # BOOT
