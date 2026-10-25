@@ -423,7 +423,6 @@ if [ "$DONE_SWITCH" = "no" ]; then
     do_mount_devprocsys
 
     load_kernel_modules
-    debug_panic "after-load-kernel-modules"
 
     do_hotplug_scan
 
