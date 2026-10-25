@@ -22,31 +22,7 @@
 # General logging
 set -x
 exec > /init.log 2>&1
-# DEBUG (comet): independent tripwire, panics after 20 s so pstore keeps a snapshot
-(
-    set +x
-    B=/bin/busybox
-    $B sleep 20
-    $B cp /init.log /init.snap 2>/dev/null
-    $B mkdir -p /proc /dev
-    $B mount -t proc proc /proc 2>/dev/null
-    [ -c /dev/kmsg ] || $B mknod /dev/kmsg c 1 11
-    echo on > /proc/sys/kernel/printk_devkmsg 2>/dev/null
-    echo "HYBRIS-TRIPWIRE: 20s" > /dev/kmsg
-    while read -r l; do echo "HYBRIS-LOG: $l" > /dev/kmsg; done < /init.snap
-    for p in /proc/[0-9]*; do
-        c=$($B cat $p/cmdline 2>/dev/null | $B tr '\0' ' ')
-        [ -n "$c" ] || continue
-        echo "HYBRIS-PS: ${p#/proc/} [$($B cat $p/wchan 2>/dev/null)] $c" > /dev/kmsg
-        case "$c" in
-            *modprobe*|*init*)
-                $B cat $p/stack 2>/dev/null | while read -r s; do
-                    echo "HYBRIS-STACK ${p#/proc/}: $s" > /dev/kmsg
-                done ;;
-        esac
-    done
-    echo c > /proc/sysrq-trigger
-) &
+
 debug_panic() {
     set +x
     B=/bin/busybox
@@ -435,7 +411,6 @@ if [ "$DONE_SWITCH" = "no" ]; then
     bootsplash
 
     mount_stowaways
-    debug_panic "after-mount-stowaways"
 
     # No target debug unless we debug here too (for now)
 
@@ -468,11 +443,13 @@ if [ "$DONE_SWITCH" = "no" ]; then
     echo "" > /proc/sys/kernel/hotplug
 
     if [ -f "/target/init-debug" ]; then
+	cp /init.log /target/init-initrd.log; sync
 	exec switch_root /target /init-debug &> /target/init-debug-stderrout
     else
 	# Prefer /sbin/preinit over /sbin/init
 	[ -x /target/sbin/preinit ] && INIT=/sbin/preinit || INIT=/sbin/init
 	if [ -x "/target$INIT" ]; then
+	    cp /init.log /target/init-initrd.log; sync
 	    exec switch_root /target $INIT --log-level=debug --log-target=kmsg &> /target/init-stderrout
 	fi
     fi
