@@ -23,18 +23,6 @@
 set -x
 exec > /init.log 2>&1
 
-debug_panic() {
-    set +x
-    B=/bin/busybox
-    $B cp /init.log /init.snap 2>/dev/null
-    $B mkdir -p /proc /dev
-    $B mount -t proc proc /proc 2>/dev/null
-    [ -c /dev/kmsg ] || $B mknod /dev/kmsg c 1 11
-    echo on > /proc/sys/kernel/printk_devkmsg 2>/dev/null
-    echo "HYBRIS-PANIC-POINT: $1" > /dev/kmsg
-    while read -r l; do echo "HYBRIS-LOG: $l" > /dev/kmsg; done < /init.snap
-    echo c > /proc/sysrq-trigger
-}
 echo "Running Mer Boat Loader"
 
 BOOTLOGO=%BOOTLOGO%
