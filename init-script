@@ -40,7 +40,7 @@ exec > /init.log 2>&1
             $B ps | while read -r l; do echo "HYBRIS-PS: $l" > /dev/kmsg; done
             $B ls /dev/block 2>&1 | $B tr '\n' ' ' | while read -r l; do echo "HYBRIS-DEV: $l" > /dev/kmsg; done
             $B sync
-            echo b > /proc/sysrq-trigger
+            echo c > /proc/sysrq-trigger
         fi
         $B sleep 2
         n=$((n + 2))
